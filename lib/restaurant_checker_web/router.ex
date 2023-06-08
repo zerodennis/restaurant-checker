@@ -14,10 +14,21 @@ defmodule RestaurantCheckerWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", RestaurantCheckerWeb do
+  pipeline :openapi do
+    plug OpenApiSpex.Plug.PutApiSpec, module: RestaurantCheckerWeb.ApiSpec
+  end
+
+  scope "/" do
     pipe_through :browser
 
-    get "/", PageController, :home
+    get "/", RestaurantCheckerWeb.PageController, :home
+    get "/swaggerui", OpenApiSpex.Plug.SwaggerUI, path: "/api/openapi"
+  end
+
+  scope "/api" do
+    pipe_through([:api, :openapi])
+
+    get "/openapi", OpenApiSpex.Plug.RenderSpec, []
   end
 
   # Other scopes may use custom stacks.
