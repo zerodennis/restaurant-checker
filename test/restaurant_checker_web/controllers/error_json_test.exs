@@ -2,7 +2,9 @@ defmodule RestaurantCheckerWeb.ErrorJSONTest do
   use RestaurantCheckerWeb.ConnCase, async: true
 
   test "renders 404" do
-    assert RestaurantCheckerWeb.ErrorJSON.render("404.json", %{}) == %{errors: %{detail: "Not Found"}}
+    assert RestaurantCheckerWeb.ErrorJSON.render("404.json", %{}) == %{
+             errors: %{detail: "Not Found"}
+           }
   end
 
   test "renders 500" do

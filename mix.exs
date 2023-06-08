@@ -50,7 +50,8 @@ defmodule RestaurantChecker.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:open_api_spex, "~> 3.16"}
+      {:open_api_spex, "~> 3.16"},
+      {:csv, "~> 3.0.5"}
     ]
   end
 

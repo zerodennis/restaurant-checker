@@ -18,7 +18,8 @@ config :restaurant_checker, RestaurantCheckerWeb.Endpoint,
     layout: false
   ],
   pubsub_server: RestaurantChecker.PubSub,
-  live_view: [signing_salt: "FTmQeTZN"]
+  live_view: [signing_salt: "FTmQeTZN"],
+  plug_multipart: :hackney
 
 # Configures the mailer
 #
