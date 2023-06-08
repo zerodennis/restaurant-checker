@@ -12,10 +12,9 @@ defmodule RestaurantChecker.RestaurantVisits.RestaurantVisit do
   @derive {Phoenix.Param, key: :restaurant_visit_id}
   @derive {Jason.Encoder, only: @schema_fields}
 
-  @primary_key false
+  @primary_key {:restaurant_visit_id, :binary_id, autogenerate: true}
 
   schema "restaurant_visit" do
-    field(:restaurant_visit_id, Ecto.UUID, primary_key: true)
     field(:restaurant_names, :string)
     field(:food_names, :string)
     field(:first_name, :string)

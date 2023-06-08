@@ -6,6 +6,7 @@ defmodule RestaurantCheckerWeb.RestaurantVisitController do
 
   alias RestaurantCheckerWeb.Schemas.RestaurantVisit, as: Visit
   alias RestaurantChecker.RestaurantVisits.RestaurantVisit
+  alias RestaurantChecker.RestaurantVisits.Resolver
 
   plug OpenApiSpex.Plug.CastAndValidate, json_render_error_v2: true
 
@@ -63,8 +64,8 @@ defmodule RestaurantCheckerWeb.RestaurantVisitController do
 
   def import_csv(conn, _params) do
     %{body_params: %{file: %Plug.Upload{filename: _filename, path: path}}} = conn
-
-    render(conn, :index, %{restaurant_visits: decode_csv(path)})
+    res = decode_csv(path)
+    render(conn, :import_csv, %{restaurant_visits: res})
   end
 
   defp decode_csv(path) do
@@ -73,11 +74,11 @@ defmodule RestaurantCheckerWeb.RestaurantVisitController do
     |> File.stream!()
     |> CSV.decode!(headers: true)
     |> Enum.map(fn item ->
-      %RestaurantVisit{
+      %{
         restaurant_names: item["restaurant_names"],
         first_name: item["first_name"],
         food_names: item["food_names"],
-        food_cost: item["food_cost"]
+        food_cost: Decimal.new(item["food_cost"])
       }
     end)
   end
