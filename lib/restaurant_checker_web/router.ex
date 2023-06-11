@@ -2,7 +2,7 @@ defmodule RestaurantCheckerWeb.Router do
   use RestaurantCheckerWeb, :router
 
   pipeline :browser do
-    plug :accepts, ["html"]
+    plug :accepts, ["html", "json"]
     plug :fetch_session
     plug :fetch_live_flash
     plug :put_root_layout, html: {RestaurantCheckerWeb.Layouts, :root}
@@ -31,7 +31,26 @@ defmodule RestaurantCheckerWeb.Router do
     get "/openapi", OpenApiSpex.Plug.RenderSpec, []
 
     scope "/restaurant-visits" do
-      get "/", RestaurantCheckerWeb.RestaurantVisitController, :index
+      get "/visitors-for-restaurant",
+          RestaurantCheckerWeb.RestaurantVisitController,
+          :customers_by_restaurant
+
+      get "/earnings-for-restaurant",
+          RestaurantCheckerWeb.RestaurantVisitController,
+          :earnings_by_restaurant
+
+      get "/most-popular-dishes",
+          RestaurantCheckerWeb.RestaurantVisitController,
+          :popular_dishes
+
+      get "/most-profitable-dishes",
+          RestaurantCheckerWeb.RestaurantVisitController,
+          :most_profitable_dishes
+
+      get "/most-frequent-visitors",
+          RestaurantCheckerWeb.RestaurantVisitController,
+          :most_frequent_visitors
+
       post "/import-csv", RestaurantCheckerWeb.RestaurantVisitController, :import_csv
     end
   end
