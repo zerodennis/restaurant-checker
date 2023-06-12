@@ -33,8 +33,8 @@ If I were to build this assuming the data was being streamed from Kafka, I would
 ### How would you improve the deployment of this system?
 
 - Containerize the system with something like Docker
-- Integrate with a CI/CD service like Semaphore
-- Use container orchestration like Kubernetes
+- Integrate with a CI/CD service like Semaphore or GitHub actions
+- Use container orchestration like ECS (Elastic Container Service)
 - Use load balancers or autoscaling if needed
 - Use something like Grafana for monitoring
 - Use Terraform to easily version control and scale if needed
