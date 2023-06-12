@@ -1,4 +1,7 @@
 defmodule RestaurantCheckerWeb.RestaurantVisitController do
+  @moduledoc """
+    Controller module for the RestaurantVisit context.
+  """
   use RestaurantCheckerWeb, :controller
 
   import OpenApiSpex.Operation, only: [response: 3]
@@ -39,6 +42,10 @@ defmodule RestaurantCheckerWeb.RestaurantVisitController do
     }
   end
 
+  @doc """
+    Take in a CSV file containing fields and values for a RestaurantVisit
+    and insert them into the database.
+  """
   def import_csv(conn, _params) do
     %{body_params: %{file: %Plug.Upload{filename: _filename, path: path}}} = conn
     res = decode_csv(path)
@@ -50,7 +57,7 @@ defmodule RestaurantCheckerWeb.RestaurantVisitController do
     %Operation{
       tags: ["Restaurant Visit"],
       summary: "Find number of visitors using restaurant name",
-      description: "Find number visitors using restaurant name",
+      description: "Find the number visitors using restaurant name",
       operationId: "RestaurantVisitController.customers_by_restaurant",
       parameters: [
         Operation.parameter(
@@ -120,7 +127,7 @@ defmodule RestaurantCheckerWeb.RestaurantVisitController do
     %Operation{
       tags: ["Restaurant Visit"],
       summary: "List popular dishes",
-      description: "List most popular dishes per restaurant",
+      description: "List the most popular dishes per restaurant",
       operationId: "RestaurantVisitController.popular_dishes",
       responses: %{
         200 =>
@@ -196,7 +203,8 @@ defmodule RestaurantCheckerWeb.RestaurantVisitController do
     %Operation{
       tags: ["Restaurant Visit"],
       summary: "Find most frequent visitors",
-      description: "Find most frequent visitors",
+      description:
+        "Find the most frequent visitors per restaurant and the customer that visited the most stores",
       operationId: "RestaurantVisitController.most_frequent_visitor",
       responses: %{
         200 =>
