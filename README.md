@@ -1,18 +1,20 @@
 # RestaurantChecker
 
-To start your Phoenix server:
+<img width="1440" alt="image" src="https://github.com/zerodennis/restaurant-checker/assets/19771211/c66fff03-c084-4a42-b4e3-513978dc6d31">
 
-  * Run `mix setup` to install and setup dependencies
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+# Prerequisites
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+- Install Elixir
+- Set up/install Phoenix
+- Set up/install Postgres
+- You will need a postgres user with the name "postgres" and the password "postgres"
+- In project root: Run `mix deps.get`
+- In project root: Run `mix ecto.create`
+- In project root: Run `mix ecto.migrate`
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+# Get started
 
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+- Run `iex -S mix phx.server` in project root
+- Go to `localhost:4000/swaggerui` on your browser once the Phoenix server has started
+- Import your `data.csv` using the `/import-csv` endpoint
+- Use the remaining endpoints.
